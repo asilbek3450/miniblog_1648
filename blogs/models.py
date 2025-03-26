@@ -12,11 +12,18 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
     
+    def comment_count(self):
+        return Comment.objects.filter(blog_id=self).count()
+    
+    def get_all_comments(self):
+        return Comment.objects.filter(blog_id=self)
+    
 
 class Comment(models.Model):
     text = models.TextField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
     blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.text
