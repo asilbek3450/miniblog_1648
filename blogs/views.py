@@ -4,6 +4,12 @@ from .forms import CommentForm
 # Create your views here.
 def home_page(request):
     bloglar = Blog.objects.all()
+    if request.method == 'POST':
+        qidiruv = request.POST.get('savol')
+        bloglar = Blog.objects.filter(title__icontains=qidiruv)
+    else:
+        qidiruv = None
+
     context = {
         'blogs': bloglar
     }
