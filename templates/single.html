@@ -14,7 +14,7 @@
                             <p class="mr-3 text-muted"><i class="fa fa-folder"></i> Admin</p>
                             <p class="mr-3 text-muted"><i class="fa fa-comments"></i> {{ blog.comment_count }} ta kommentariya</p>
                         </div>
-                        <p>{{ blog.description }}</p>
+                        <p>{{ blog.description | linebreaks }}</p>
                         
                         
                     <div class="col-12 py-4">
