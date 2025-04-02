@@ -35,8 +35,18 @@ def blog_detail(request, blog_id):
 
 
 def add_blog(request):
-    form = BlogForm
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user
+            blog.save()
+            return render(request, 'blog.html')
+    else:
+        form = BlogForm()
+
     context = {
         'form': form
     }
-    return render(request, 'add_blog.html', context)
+    return render(request, 'add_blog.html', context)    
+    
