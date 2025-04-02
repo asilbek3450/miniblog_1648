@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog
 from .forms import CommentForm, BlogForm
 # Create your views here.
@@ -41,7 +41,7 @@ def add_blog(request):
             blog = form.save(commit=False)
             blog.author = request.user
             blog.save()
-            return render(request, 'blog.html')
+            return redirect('home_page')
     else:
         form = BlogForm()
 
